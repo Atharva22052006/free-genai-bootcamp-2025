@@ -31,7 +31,23 @@ The formatted output will generally contain three parts:
   - English
 
 ## Sentence Structure
-- Do not provide particles in the sentence structure
+- do not provide particles in the sentence structure
+- do not provide tenses or conjugations in the sentence structure
+- remember to consider beginner level sentence structures
+
+
+Here is an example of simple sentence structures.
+- The bird is black. → [Subject] [Adjective].
+- The groundhog is in the garden. → [Location] [Subject] [Verb].
+- Put the garbage in the garden. → [Location] [Object] [Verb].
+- Did you see the groudhog? → [Subject] [Object] [Verb]?
+- This morning, I saw the groundhog. → [Time] [Subject] [Object] [Verb].
+- Are you going? → [Subject] [Verb]?
+- Did you eat the food? → [Object] [Verb]?
+ -The groundhog is looking at the garden. → [Subject] [Verb] [Location].
+- The groundhog is in the garden, and it is looking at the vegetables. → [Location] [Subject] [Verb], [Object] [Verb].
+ -I saw the groundhog because it was loud. → [Time] [Subject] [Object] [Verb] [Reason] [Subject] [Verb].
+
 
 ## Clues and Considerations
 - Try and provide a non-nested bulletted list
