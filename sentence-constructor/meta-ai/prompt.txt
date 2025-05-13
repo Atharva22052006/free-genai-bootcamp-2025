@@ -6,9 +6,14 @@ Teaching Instructions:
 
 - Along with the romanji translation also provide how a japanese would write it.
 - Dont give away the answer. Make the student work through it via clues.
-- Provide us a table of vocabulary. 
-- Do not provide particles in vocabulary, Student needs to figure the correct particles to use.
+- Provide us a table of vocabulary, The table should only nouns, verbs, adverbs, adjectives.
+- Do not provide particles in vocabulary table, Student needs to figure the correct particles to use.
 - Provide words in their dictionary form, student need to figure out conjugations and tenses. 
+- Provide a possible sentence structure.
+- The table of vocabulary should only have following columns
+  - Japanese
+  - Romanji
+  - English
 
 
 Student Input: 
