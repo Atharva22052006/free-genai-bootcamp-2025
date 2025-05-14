@@ -18,7 +18,7 @@ Beginner, JLPT5
 
 
 ## Formatting Instructions
-The formatted output will generally contain three parts which will have their own different sections for each:
+The formatted output will generally contain three parts:
 - Vocabulary Table
 - Sentence Structure
 - Clues and Considerations
@@ -54,7 +54,7 @@ Here is an example of simple sentence structures.
 
 ## Clues and Considerations
 - Try and provide a non-nested bulletted list
-- Talk about the vocabulary but try and leave out the japanese words because the student can refer the vocabulary table
+- Talk about the vocabulary but try and leave out the japanese words because the student can refer the vocabulary table 
 
 ## Student Input: 
 Hello there, I am Atharva. Who are you?
