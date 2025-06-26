@@ -1,0 +1,32 @@
+Step-by-Step Guide to Save Changes to GitHub
+
+1. Initialize Git Repository (if not already done):
+   git init
+
+2. Add all files to staging area:
+   git add .
+
+3. Commit your changes with a descriptive message:
+   git commit -m "Your commit message here"
+
+4. Add the remote repository (if not already done):
+   git remote add origin https://github.com/Atharva22052006/free-genai-bootcamp-2025.git
+
+5. Push your changes to GitHub:
+   git push -u origin main
+
+Additional Useful Commands:
+
+- Check status of your changes:
+  git status
+
+- Check which files are staged:
+  git diff --staged
+
+- View commit history:
+  git log
+
+- Pull latest changes from remote:
+  git pull
+
+Note: The repository is now configured with your GitHub username (Atharva22052006) and repository name (free-genai-bootcamp-2025). 
