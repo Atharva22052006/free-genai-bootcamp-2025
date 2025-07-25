@@ -70,6 +70,7 @@ We'll need the following endpoints to power this page
 - GET/api/groups/:id
 - GET/api/groups/:id/words
 - GET/api/dashboard/last_study_session
+    - Pagination with 100 per page
 - GET/api/dashboard/study_progress
 - GET/api/dashboard/quick_stats
 - GET/api/study_activities
@@ -101,20 +102,23 @@ Returns a paginated list of vocabulary words.
 **Response:**
 ```json
 {
-  "words": [
+  "items": [
     {
       "id": 1,
       "japanese_word": "猫",
       "romanji": "neko",
       "english": "cat",
-      "parts": { "part_of_speech": "noun" }
+      "parts": { "part_of_speech": "noun" },
+      "correct_count": 5,
+      "wrong_count": 2
     }
     // ... up to 100 items
   ],
   "pagination": {
-    "page": 1,
-    "per_page": 100,
-    "total": 1234
+    "current_page": 1,
+    "total_pages": 5,
+    "total_items": 500,
+    "items_per_page": 100,
   }
 }
 ```
@@ -129,11 +133,18 @@ Returns a single vocabulary word by ID.
 **Response:**
 ```json
 {
-  "id": 1,
   "japanese_word": "猫",
   "romanji": "neko",
   "english": "cat",
-  "parts": { "part_of_speech": "noun" }
+  "parts": { "part_of_speech": "noun" },
+  "stats": {
+    "correct_count": 5,
+    "wrong_count": 5
+  },
+  "groups":{
+    "id": 123,
+    "name": "Basic Greetings"
+  }
 }
 ```
 
@@ -151,17 +162,19 @@ Returns a paginated list of word groups.
 **Response:**
 ```json
 {
-  "groups": [
+  "items": [
     {
       "id": 1,
-      "name": "Animals"
+      "name": "Animals",
+      "word_count": 20
     }
     // ... up to 100 items
   ],
   "pagination": {
-    "page": 1,
-    "per_page": 100,
-    "total": 25
+    "current_page": 1,
+    "total_pages": 1,
+    "items_per_page": 100,
+    "total_items": 25
   }
 }
 ```
@@ -177,7 +190,10 @@ Returns a single group by ID.
 ```json
 {
   "id": 1,
-  "name": "Animals"
+  "name": "Animals",
+  "stats": {
+    "total_word_count": 20
+  }
 }
 ```
 
@@ -191,11 +207,7 @@ Returns all words in a specific group.
 **Response:**
 ```json
 {
-  "group": {
-    "id": 1,
-    "name": "Animals"
-  },
-  "words": [
+  "items": [
     {
       "id": 1,
       "japanese_word": "猫",
@@ -298,9 +310,10 @@ Returns a single study activity by ID.
 ```json
 {
   "id": 7,
-  "study_session_id": 42,
-  "group_id": 3,
-  "created_at": "2024-06-01T12:34:56Z"
+  "name": "Vocabulary Quiz",
+  "thumbnail url": "https://example,com/thumbnail.jpg",
+  "Description": "Practice your Vocabulary with with Flashcards"
+
 }
 ```
 
@@ -314,21 +327,22 @@ Returns all study sessions for a given study activity.
 **Response:**
 ```json
 {
-  "study_activity": {
-    "id": 7,
-    "study_session_id": 42,
-    "group_id": 3,
-    "created_at": "2024-06-01T12:34:56Z"
-  },
-  "study_sessions": [
+  "items": [
     {
-      "id": 42,
-      "group_id": 3,
-      "created_at": "2024-06-01T12:34:56Z",
-      "study_activity_id": 7
-    },
-    // ...
-  ]
+      "id": 7,
+      "activity_name": "Vocabulary Quiz",
+      "group_name": "Basic Greetings",
+      "start_time": "2024-06-01T12:34:56Z",
+      "end_time": "2024-06-01T14:51:04Z",
+      "review_item_count": 20
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "total_pages": 5,
+    "total_items": 100,
+    "items_per_page": 20
+  }
 }
 ```
 
@@ -351,10 +365,8 @@ Creates a new study activity.
 ```json
 {
   "id": 8,
-  "study_session_id": 43,
-  "group_id": 3,
-  "created_at": "2024-06-02T09:00:00Z"
-}
+  "group_id": 3
+} 
 ```
 
 ---
@@ -403,7 +415,7 @@ Returns a paginated list of all study sessions.
       "group_id": 3,
       "created_at": "2024-06-01T12:34:56Z",
       "study_activity_id": 7
-    }
+    } 
     // ... up to 100 items
   ],
   "pagination": {
