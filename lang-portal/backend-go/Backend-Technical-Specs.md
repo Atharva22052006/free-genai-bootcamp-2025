@@ -379,19 +379,22 @@ Returns all study sessions for a given group.
 **Response:**
 ```json
 {
-  "group": {
-    "id": 3,
-    "name": "Food"
-  },
-  "study_sessions": [
+  "items": [
     {
-      "id": 42,
-      "group_id": 3,
-      "created_at": "2024-06-01T12:34:56Z",
-      "study_activity_id": 7
-    },
-    // ...
-  ]
+      "id": 7,
+      "activity_name": "Vocabulary Quiz",
+      "group_name": "Basic Greetings",
+      "start_time": "2024-06-01T12:34:56Z",
+      "end_time": "2024-06-01T14:51:04Z",
+      "review_item_count": 20
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "total_pages": 5,
+    "total_items": 100,
+    "items_per_page": 20
+  }
 }
 ```
 
@@ -402,26 +405,25 @@ Returns all study sessions for a given group.
 **Description:**  
 Returns a paginated list of all study sessions.
 
-**Request Parameters:**
-- `page` (optional, integer): Page number (default: 1)
-- `per_page` (optional, integer): Items per page (default: 100, max: 100)
 
 **Response:**
 ```json
 {
-  "study_sessions": [
+  "items": [
     {
-      "id": 42,
-      "group_id": 3,
-      "created_at": "2024-06-01T12:34:56Z",
-      "study_activity_id": 7
-    } 
-    // ... up to 100 items
+      "id": 7,
+      "activity_name": "Vocabulary Quiz",
+      "group_name": "Basic Greetings",
+      "start_time": "2024-06-01T12:34:56Z",
+      "end_time": "2024-06-01T14:51:04Z",
+      "review_item _count": 20
+    }
   ],
   "pagination": {
-    "page": 1,
-    "per_page": 100,
-    "total": 250
+    "current_page": 1,
+    "total_pages": 5,
+    "total_items": 100,
+    "items_per_page": 20
   }
 }
 ```
@@ -437,9 +439,11 @@ Returns a single study session by ID.
 ```json
 {
   "id": 42,
-  "group_id": 3,
-  "created_at": "2024-06-01T12:34:56Z",
-  "study_activity_id": 7
+  "activity_name": "Vocabulary Quiz",
+  "group_name": "Basic Greetings",
+  "start_time": "2024-06-01T12:34:56Z",
+  "end_time": "2024-06-01T14:34:56Z",
+  "review_items_count": 20
 }
 ```
 
@@ -453,26 +457,19 @@ Returns all word review items for a given study session.
 **Response:**
 ```json
 {
-  "study_session": {
-    "id": 42,
-    "group_id": 3,
-    "created_at": "2024-06-01T12:34:56Z",
-    "study_activity_id": 7
+  "items": {
+    "japanese_word": "猫",
+    "romanji": "neko",
+    "english": "cat",
+    "correct_count": 5,
+    "wrong_count": 2
   },
-  "word_review_items": [
+  "pagination": [
     {
-      "id": 101,
-      "word_id": 1,
-      "study_sessions_id": 42,
-      "correct": true,
-      "created_at": "2024-06-01T12:35:00Z"
-    },
-    {
-      "id": 102,
-      "word_id": 2,
-      "study_sessions_id": 42,
-      "correct": false,
-      "created_at": "2024-06-01T12:36:00Z"
+      "current_page": 1,
+      "total_pages": 1,
+      "total_items": 20,
+      "items_per_page": 100
     }
     // ...
   ]
@@ -505,7 +502,7 @@ Resets all data, including vocabulary, groups, and study history.
 ```json
 {
   "success": true,
-  "message": "All data has been reset."
+  "message": "System has been fully reset."
 }
 ```
 
@@ -516,7 +513,12 @@ Resets all data, including vocabulary, groups, and study history.
 **Description:**  
 Records a review for a word in a study session.
 
-**Request Body:**
+**Request Params:**
+- id (study_session_id) integer
+- word_id integer
+- correct boolean
+
+**Request Payload:**
 ```json
 {
   "correct": true
@@ -526,7 +528,7 @@ Records a review for a word in a study session.
 **Response:**
 ```json
 {
-  "id": 201,
+  "success": true,
   "word_id": 1,
   "study_sessions_id": 42,
   "correct": true,
